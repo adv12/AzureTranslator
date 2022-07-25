@@ -1,0 +1,211 @@
+{
+  "name": "azuretranslate",
+  "displayName": "AzureTranslate",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.66.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:azuretranslate.translate",
+	"onCommand:azuretranslate.setSubscriptionKey",
+	"onCommand:azuretranslate.enableDisableHtml",
+	"onCommand:azuretranslate.selectSourceLanguage",
+	"onCommand:azuretranslate.setEndpoint",
+	"onCommand:azuretranslate.editSettings"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+		"category": "AzureTranslate",
+        "command": "azuretranslate.translate",
+        "title": "Translate"
+      },
+	  {
+		"category": "AzureTranslate",
+		"command": "azuretranslate.setSubscriptionKey",
+		"title": "Set Azure Subscription Key"
+	  },
+	  {
+		"category": "AzureTranslate",
+		"command": "azuretranslate.setEndpoint",
+		"title": "Set Azure Translator Endpoint"
+	  },
+	  {
+		"category": "AzureTranslate",
+		"command": "azuretranslate.enableDisableHtml",
+		"title": "Enable/Disable Treat as HTML"
+	  },
+	  {
+		"category": "AzureTranslate",
+		"command": "azuretranslate.selectSourceLanguage",
+		"title": "Select Source Language"
+	  },
+	  {
+		"category": "AzureTranslate",
+        "command": "azuretranslate.editSettings",
+        "title": "Edit Settings"
+      }
+    ],
+    "configuration": {
+		"title": "AzureTranslate",
+		"properties": {
+		  "azureTranslate.html": {
+			"type": "boolean",
+			"default": false,
+			"description": "Treat the text to be translated as HTML (i.e. don't translate tag names)."
+		  },
+		  "azureTranslate.endpoint": {
+			"type": "string",
+			"default": "https://api.cognitive.microsofttranslator.com",
+			"description": "The endpoint for the Azure translator service (varies by region)."
+		  },
+		  "azureTranslate.sourceLanguage": {
+			"type": ["string", "null"],
+			"default": null,
+			"description": "Source Language",
+			"enum":["Detect",
+				"Afrikaans: af",
+				"Albanian: sq",
+				"Amharic: am",
+				"Arabic: ar",
+				"Armenian: hy",
+				"Assamese: as",
+				"Azerbaijani (Latin): az",
+				"Bangla: bn",
+				"Bashkir: ba",
+				"Basque: eu",
+				"Bosnian (Latin): bs",
+				"Bulgarian: bg",
+				"Cantonese (Traditional): yue",
+				"Catalan: ca",
+				"Chinese (Literary): lzh",
+				"Chinese Simplified: zh",
+				"Chinese Traditional: zh",
+				"Croatian: hr",
+				"Czech: cs",
+				"Danish: da",
+				"Dari: prs",
+				"Divehi: dv",
+				"Dutch: nl",
+				"English: en",
+				"Estonian: et",
+				"Faroese: fo",
+				"Fijian: fj",
+				"Filipino: fil",
+				"Finnish: fi",
+				"French: fr",
+				"French (Canada): fr",
+				"Galician: gl",
+				"Georgian: ka",
+				"German: de",
+				"Greek: el",
+				"Gujarati: gu",
+				"Haitian Creole: ht",
+				"Hebrew: he",
+				"Hindi: hi",
+				"Hmong Daw (Latin): mww",
+				"Hungarian: hu",
+				"Icelandic: is",
+				"Indonesian: id",
+				"Inuinnaqtun: ikt",
+				"Inuktitut: iu",
+				"Inuktitut (Latin): iu",
+				"Irish: ga",
+				"Italian: it",
+				"Japanese: ja",
+				"Kannada: kn",
+				"Kazakh: kk",
+				"Khmer: km",
+				"Klingon: tlh",
+				"Klingon (plqaD): tlh",
+				"Korean: ko",
+				"Kurdish (Central): ku",
+				"Kurdish (Northern): kmr",
+				"Kyrgyz (Cyrillic): ky",
+				"Lao: lo",
+				"Latvian: lv",
+				"Lithuanian: lt",
+				"Macedonian: mk",
+				"Malagasy: mg",
+				"Malay (Latin): ms",
+				"Malayalam: ml",
+				"Maltese: mt",
+				"Maori: mi",
+				"Marathi: mr",
+				"Mongolian (Cyrillic): mn",
+				"Mongolian (Traditional): mn",
+				"Myanmar: my",
+				"Nepali: ne",
+				"Norwegian: nb",
+				"Odia: or",
+				"Pashto: ps",
+				"Persian: fa",
+				"Polish: pl",
+				"Portuguese (Brazil): pt",
+				"Portuguese (Portugal): pt",
+				"Punjabi: pa",
+				"Queretaro Otomi: otq",
+				"Romanian: ro",
+				"Russian: ru",
+				"Samoan (Latin): sm",
+				"Serbian (Cyrillic): sr",
+				"Serbian (Latin): sr",
+				"Slovak: sk",
+				"Slovenian: sl",
+				"Somali (Arabic): so",
+				"Spanish: es",
+				"Swahili (Latin): sw",
+				"Swedish: sv",
+				"Tahitian: ty",
+				"Tamil: ta",
+				"Tatar (Latin): tt",
+				"Telugu: te",
+				"Thai: th",
+				"Tibetan: bo",
+				"Tigrinya: ti",
+				"Tongan: to",
+				"Turkish: tr",
+				"Turkmen (Latin): tk",
+				"Ukrainian: uk",
+				"Upper Sorbian: hsb",
+				"Urdu: ur",
+				"Uyghur (Arabic): ug",
+				"Uzbek (Latin: uz",
+				"Vietnamese: vi",
+				"Welsh: cy",
+				"Yucatec Maya: yua",
+				"Zulu: zu"]
+		  }
+		}
+	  }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.2.0",
+    "@types/mocha": "^9.1.0",
+    "@types/node": "14.x",
+    "@types/vscode": "^1.66.0",
+    "@typescript-eslint/eslint-plugin": "^5.16.0",
+    "@typescript-eslint/parser": "^5.16.0",
+    "@vscode/test-electron": "^2.1.3",
+    "eslint": "^8.11.0",
+    "glob": "^7.2.0",
+    "mocha": "^9.2.2",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
+}
